@@ -1,58 +1,60 @@
-#form-wrapper{
+.form-wrapper {
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin: 20px 0px;
 }
 
-#form{
+#form {
     display: flex;
     flex-direction: column;
+    /* justify-content: center; */
     align-items: center;
 }
 
-#searchInput{
+#searchInput {
     width: 75%;
     padding: 5px;
     border-radius: 5px;
     text-align: center;
 }
 
-#button-wrapper{
+.button-wrapper {
     margin: 10px 0px;
 }
 
-#searchButton{
+#searchButton {
     width: 110px;
     border-radius: 5px;
     border: none;
     padding: 5px;
-    background-color: #4F4E4E;
-    box-shadow: 1px 3px 5px black;
+    background-color: #464646;
     color: #fff;
+    box-shadow: 1px 3px 5px lightgrey;
 }
 
-#clearButton{
+#clearButton {
     width: 110px;
     border-radius: 5px;
     border: none;
     padding: 5px;
-    background-color: #be3939;
-    box-shadow: 1px 3px 5px black;
+    background-color: #cc3838;
     color: #fff;
+    box-shadow: 1px 3px 5px lightgrey;
 }
 
-.card{
-    margin: 10px;
+.imagelist-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.imagelist-wrapper > .card{
+    margin:20px;
     border: 1px solid grey;
     padding: 15px;
     border-radius: 5px;
     box-shadow: 3px 5px 8px grey;
 }
-
-#images{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-

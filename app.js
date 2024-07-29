@@ -1,56 +1,63 @@
-const formWrappeer = document.querySelector("#form-wrapper")
-const form = document.querySelector("#form")
-const searchInput = document.querySelector("#searchInput")
-const buttonWrapper = document.querySelector("#buttonWrapper")
-const searchButton = document.querySelector("#searchButton")
-const clearButton = document.querySelector("#clearButton")
-const images = document.querySelector("#images")
+const formWrapper = document.querySelector(".form-wrapper");
+const form = document.querySelector("#form");
+const searchInput = document.querySelector("#searchInput");
+const buttonWrapper= document.querySelector(".button-wrapper");
+const searchButton = document.querySelector("#searchButton");
+const clearButton = document.querySelector("#clearButton");
+const imageListWrapper = document.querySelector(".imagelist-wrapper");
 
 runEventListeners();
 
 function runEventListeners(){
-    form.addEventListener("submit" , search)
-    clearButton.addEventListener("click" , clear)
+    form.addEventListener("submit" , search);
+    clearButton.addEventListener("click", clear);
 }
 
 function clear(){
     searchInput.value="";
-    images.innerHTML="";
+    Array.from(imageListWrapper.children).forEach((child)=>child.remove())
+    // imageListWrapper.innerHTML="";
+    
 }
 
 function search(e){
     const value = searchInput.value.trim();
-
-    fetch(`https://api.unsplash.com/photos?query=${value}` , {
-        method : "GET" , 
+    // @RequestParam  - Spring- Rest APİ
+    fetch(`https://api.unsplash.com/search/photos?query=${value}`,{
+        method : "GET",
         headers : {
-            Authorization: "Client-ID y7dRMsfIi0f7lQqbSql3ZW0lHfrQkF9pUmszejApnSc"
+            Authorization : "Client-ID mRJsrC8r-liLlbz6M65DoEqWMRYmxYaEkzHZz3vWt5E"
         }
     })
     .then((res)=> res.json())
     .then((data)=>{
-        Array.from(data).forEach((image) =>{
-        addImageToUI(image.urls.small);
-        }
-          
-    );
-          
-    }
-    )
-    .catch((err)=> console.log(err))
+       Array.from(data.results).forEach((image)=>{
+        // console.log(image.urls.small)
+        addImageToUI(image.urls.small)
+       })
+    })
+    .catch((err)=> console.log(err));
+
 
     e.preventDefault();
 }
 
+
 function addImageToUI(url){
-    const div = document.createElement("div")
+    /*
+ <div class="card">
+                <img src="" alt="">
+            </div>
+    */
+    console.log(imageListWrapper)
+    const div = document.createElement("div");
     div.className="card";
 
     const img = document.createElement("img");
-    img.setAttribute("src" , url)
-    img.height=`400`
-    img.width=`400`
+    img.setAttribute("src",url);
+    img.height='400';
+    img.width='400';
 
     div.append(img);
-    images.append(div);
-} 
+    imageListWrapper.append(div);
+}
